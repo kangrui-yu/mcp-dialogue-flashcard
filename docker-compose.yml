@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  python-api:
+    build:
+      context: ./src/python_api
+      dockerfile: Dockerfile
+    environment:
+      APP_HOST: "0.0.0.0"
+      APP_PORT: "8081"
+      FLASHCARDS_CSV: "/app/data/flashcards.csv"
+    volumes:
+      - ./data/flashcards.csv:/app/data/flashcards.csv:ro
+    ports:
+      - "8081:8081"
+
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    environment:
+      PY_API_BASE_URL: "http://python-api:8081/api/v1"
+    depends_on:
+      - python-api

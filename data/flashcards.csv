@@ -1,0 +1,3 @@
+concept,question,answer
+binary_search,What is binary search?,A divide-and-conquer search algorithm on sorted arrays.
+hash_map,What is a hash map?,A key-value data structure using hashing for fast lookup.

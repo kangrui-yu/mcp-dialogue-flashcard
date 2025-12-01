@@ -1,0 +1,22 @@
+{
+  "name": "mcp-dialogue-flashcards",
+  "version": "1.0.0",
+  "description": "MCP server exposing summarize_dialogue and retrieve_flashcard backed by a Flask API",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsx src/mcp_server/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}

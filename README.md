@@ -18,3 +18,7 @@ Architecture:
     - Flashcard retrieval from `data/flashcards.csv`.
 
 ---
+
+
+https://github.com/user-attachments/assets/b21a7079-4e31-4207-b181-a8743d468f67
+

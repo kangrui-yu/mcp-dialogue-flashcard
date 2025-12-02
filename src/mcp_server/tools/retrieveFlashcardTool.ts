@@ -40,14 +40,13 @@ export function registerRetrieveFlashcardTool(
 
       const { card } = res;
       const text = `Flashcard for "${card.concept}":\nQ: ${card.question}\nA: ${card.answer}`;
-
       return {
         content: [{ type: "text", text }],
         structuredContent: {
           found: true,
-          concept: card.concept,
-          question: card.question,
-          answer: card.answer,
+          concept: card['concept'],
+          question: card['question'],
+          answer: card['answer'],
         },
       };
     },

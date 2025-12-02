@@ -9,6 +9,33 @@ const SummarizeRes = z.object({
   summary: z.string(),
 });
 
+const StartSummaryReq = z.object({
+  dialogue: z.array(z.object({ role: z.string(), message: z.string() })),
+  user_id: z.number().optional(),
+});
+const StartSummaryRes = z.object({
+  task_id: z.string(),
+  requestId: z.string().optional(),
+});
+
+const SummaryStatusRes = z.object({
+  task_id: z.string(),
+  status: z.enum(["pending", "running", "completed", "failed"]),
+  current_stage: z.string(),
+  progress_count: z.number(),
+  total_stages: z.number(),
+  result: z.string().nullable(),
+  error: z.string().nullable(),
+  created_at: z.number(),
+  started_at: z.number().nullable(),
+  completed_at: z.number().nullable(),
+  progress: z.array(z.object({
+    stage: z.string(),
+    message: z.string(),
+    timestamp: z.number(),
+  })),
+});
+
 const FlashcardRes = z.object({
   found: z.boolean(),
   card: z
@@ -84,6 +111,58 @@ export const pythonApi = {
     }
     const json = await res.json();
     return SummarizeRes.parse(json);
+  },
+
+  startDialogueSummary: async (
+    dialogue: { role: string; message: string }[],
+    user_id?: number,
+  ) => {
+    const body = StartSummaryReq.parse({ dialogue, user_id });
+    const res = await withRetries(() =>
+      http("/start-dialogue-summary", {
+        method: "POST",
+        body: JSON.stringify(body),
+      }),
+    );
+    if (!res.ok) {
+      throw new Error(`start-dialogue-summary failed: ${res.status}`);
+    }
+    const json = await res.json();
+    return StartSummaryRes.parse(json);
+  },
+
+  querySummaryStatus: async (task_id: string) => {
+    const res = await withRetries(() =>
+      http(`/query-summary/${encodeURIComponent(task_id)}`, {
+        method: "GET",
+      }),
+    );
+    if (res.status === 404) {
+      return null;
+    }
+    if (!res.ok) {
+      throw new Error(`query-summary failed: ${res.status}`);
+    }
+    const json = await res.json();
+    return SummaryStatusRes.parse(json);
+  },
+
+  waitSummaryCompletion: async (task_id: string, timeout?: number) => {
+    const timeoutParam = timeout ? `?timeout=${timeout}` : "";
+    const res = await withRetries(() =>
+      http(`/wait-summary/${encodeURIComponent(task_id)}${timeoutParam}`, {
+        method: "GET",
+        timeoutMs: timeout ? (timeout + 10) * 1000 : undefined, // Add buffer to HTTP timeout
+      }),
+    );
+    if (res.status === 404) {
+      return null;
+    }
+    if (!res.ok) {
+      throw new Error(`wait-summary failed: ${res.status}`);
+    }
+    const json = await res.json();
+    return SummaryStatusRes.parse(json);
   },
 
   retrieveFlashcard: async (concept: string) => {

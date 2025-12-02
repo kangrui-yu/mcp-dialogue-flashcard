@@ -1,3 +1,13 @@
-concept,question,answer
-binary_search,What is binary search?,A divide-and-conquer search algorithm on sorted arrays.
-hash_map,What is a hash map?,A key-value data structure using hashing for fast lookup.
+concept,question,answer,user_id
+maximum_likelihood,What is the principle of maximum likelihood in statistics?,"It is a method for estimating the parameters of a statistical model by maximizing the likelihood function, which measures how well the model explains the observed data.",
+independent_random_variables,What does it mean for two random variables to be independent?,It means that the occurrence of one random variable does not affect the probability distribution of the other.,
+markov_chains,What is a Markov chain?,A Markov chain is a stochastic process where the future state depends only on the current state and not on the sequence of events that preceded it.,
+convex_sets,What is a convex set in mathematics?,"A set is convex if, for any two points within the set, the line segment connecting them is also entirely contained within the set.",
+convex_optimization,What is convex optimization?,Convex optimization is a subfield of optimization that studies the problem of minimizing convex functions over convex sets.,
+random_variables,What is a random variable in probability theory?,"A random variable is a numerical outcome of a random phenomenon, which can take on different values based on the outcome of a random process.",
+positive_definite_matrices,What is a positive definite matrix?,"A positive definite matrix is a symmetric matrix where all its eigenvalues are positive, meaning for any non-zero vector x, the quadratic form x^T A x is greater than zero.",
+functions_of_several_variables,What is a function of several variables?,"A function of several variables is a mathematical function that takes multiple input variables and produces a single output, often represented as f(x, y, z, ...) where x, y, z are the input variables.",
+four_fundamental_subspaces,What are the four fundamental subspaces associated with a matrix?,"The four fundamental subspaces are the Column Space, Null Space, Row Space, and Left Null Space.",
+gaussian_elimination,What is the primary purpose of Gaussian elimination in linear algebra?,To solve systems of linear equations by transforming the matrix to row echelon form.,
+backpropagation,What is the purpose of backpropagation in neural networks?,To compute the gradient of the loss function with respect to each weight by applying the chain rule.,
+dot_product,What is the dot product of two vectors?,The dot product is a scalar value obtained by multiplying corresponding components of two vectors and summing the results.,

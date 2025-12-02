@@ -10,7 +10,7 @@ export function registerSummarizeDialogueTool(
     "summarize_dialogue",
     {
       title: "Summarize dialogue",
-      description: "Summarize a list of dialogue turns.",
+      description: "Summarize a list of dialogue turns, This tool takes longer to process, You MUST NOT abort or send multiple requests in parallel.",
       inputSchema: {
         dialogue: z.array(
           z.object({
